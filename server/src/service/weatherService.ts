@@ -68,13 +68,18 @@ class WeatherService {
   // TODO: Create fetchWeatherData method
   private async fetchWeatherData(coordinates: Coordinates) {
     const query = this.buildWeatherQuery(coordinates);
-    return await this.fetchLocationData(query);
+    const response = await fetch(query);
+    return await response.json();
   }
   // TODO: Build parseCurrentWeather method
   private parseCurrentWeather(response: any) {
     const { temp, wind_speed, humidity, weather } = response.current;
     const { icon } = weather[0];
-    return new Weather(temp, wind_speed, humidity, icon);
+    if (temp) {
+      return new Weather(temp, wind_speed, humidity, icon);
+    } else {
+      throw new Error('Temperature data not available');
+    }
   }
   // TODO: Complete buildForecastArray method
   private buildForecastArray(currentWeather: Weather, weatherData: any[]) {
@@ -83,7 +88,7 @@ class WeatherService {
       const { icon } = weather[0];
       return new Weather(temp, wind_speed, humidity, icon);
     });
-    forecastArray.unshift(currentWeather);
+    forecastArray.push(currentWeather);
     return forecastArray;
   }
   // TODO: Complete getWeatherForCity method
@@ -92,8 +97,8 @@ class WeatherService {
     const coordinates = await this.fetchAndDestructureLocationData();
     const weatherData = await this.fetchWeatherData(coordinates);
     const currentWeather = this.parseCurrentWeather(weatherData);
-    const forecastArray = this.buildForecastArray(currentWeather, weatherData.daily);
-    return forecastArray;
+    const forecast = this.buildForecastArray(currentWeather, weatherData.daily);
+    return forecast;
   }
 }
 
