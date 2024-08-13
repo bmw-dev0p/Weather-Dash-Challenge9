@@ -2,7 +2,7 @@ import { Router } from 'express';
 // import weatherService from '../../service/weatherService';
 const router = Router();
 
-import HistoryService from '../../service/historyService.js';
+// import HistoryService from '../../service/historyService.js';
 import WeatherService from '../../service/weatherService.js';
 
 // TODO: POST Request with city name to retrieve weather data
@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
     res.status(500).json(err);
   }
   // TODO: save city to search history
-  HistoryService.addCity(req.body.city, req.body.id);
+  // HistoryService.addCity(req.body.city, req.body.id);
   
 });
 
