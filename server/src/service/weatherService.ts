@@ -110,15 +110,19 @@ class WeatherService {
   //takes in query response and returns Weather object with data
   private parseCurrentWeather(response: any) {
     try {
-      console.log('response: ', response);
-      const { city, temp, wind_speed, humidity, weather } = response.list[0];
-      console.log('response.list[0]: ', response.list[0]);
+      // console.log('response: ', response.list[0].main);
+      // console.log('response: ', response.list[0].weather);
+      // const { city, temp, wind_speed, humidity, weather } = response.list[0];
+      // console.log('response.list[0]: ', response.list[0]);
+      const city = response.city.name;
       console.log('city: ', city);
+      const temp = response.list[0].main.temp;
       console.log('temp: ', temp);
+      const wind_speed = response.list[0].wind.speed;
       console.log('wind_speed: ', wind_speed);
+      const humidity = response.list[0].main.humidity;
       console.log('humidity: ', humidity);
-      console.log('weather: ', weather);
-      const { icon } = weather[0];
+      const icon = response.list[0].weather[0].icon;
       return new Weather(city, temp, wind_speed, humidity, icon);
     } catch (err) {
       console.log('Error: Unable to parseCurrentWeather', err);
@@ -130,31 +134,52 @@ class WeatherService {
   // TODO: Complete buildForecastArray method
   // this basically adds current weather to the forecast ?
   private buildForecastArray(currentWeather: Weather, weatherData: any[]) {
-    //const forecastArray = weather[] [];
-    // weatherData.daily.forEach((data: any) => {
+    try {
+      console.log('currentWeather: ', currentWeather);
+      console.log('weatherData: ', weatherData);
+    let forecastArray: Weather[] = [];
+    // console.log('forecastArray: ', forecastArray);
+    console.log('----------------------------------');    
+    weatherData.forEach((data: any) => {
+      const city = currentWeather.city;
+      const temp = data.main.temp;
+      const wind_speed = data.wind.speed;
+      const humidity = data.main.humidity;
+      const icon = data.weather[0].icon;
+      forecastArray.push(new Weather(city, temp, wind_speed, humidity, icon));
+
+      
+      
+    });
+    console.log('forecastArray: ', forecastArray);
+    return forecastArray; 
+  } catch (err) {
+    console.log('Error: Unable to buildForecastArray', err);
+    return [new Weather('', 0, '', 0, '')]; // Return empty Weather object
+  }
+}
+  // } catch (err) {
+  //     console.log('Error: Unable to buildForecastArray', err);
+  //     return [new Weather('', 0, '', 0, '')]; // Return empty Weather object
+  //   }
+  
+    // try {
+    //   // const time;
+    //   // grab 1 object from each day 
+    //   //dt_text
+    //   const forecastArray = weatherData.map((data: any) => {
     //   const { city, temp, wind_speed, humidity, weather } = data;
     //   const { icon } = weather[0];
-      // const date = new Date(weather.dt * 1000).to ISOString();
-      // forecastArray.push(new Weather(city, temp, wind_speed, humidity, icon));
-      // return forecastArray;
-    
-    try {
-      // const time;
-      // grab 1 object from each day 
-      //dt_text
-      const forecastArray = weatherData.map((data: any) => {
-      const { city, temp, wind_speed, humidity, weather } = data;
-      const { icon } = weather[0];
-      // const date = new Date(weather.dt * 1000).to ISOString();
-      return new Weather(city, temp, wind_speed, humidity, icon);
-    });
-    forecastArray.push(currentWeather);
-    return forecastArray;
-    } catch (err) {
-      console.log('Error: Unable to buildForecastArray', err);
-      return [new Weather('', 0, '', 0, '')]; // Return empty Weather object
-    }
-  }
+    //   // const date = new Date(weather.dt * 1000).to ISOString();
+    //   return new Weather(city, temp, wind_speed, humidity, icon);
+    // });
+    // forecastArray.push(currentWeather);
+    // return forecastArray;
+    // } catch (err) {
+    //   console.log('Error: Unable to buildForecastArray', err);
+    //   return [new Weather('', 0, '', 0, '')]; // Return empty Weather object
+    // }
+  // }
   // TODO: Complete getWeatherForCity method
   // main method
   async getWeatherForCity(city: string) {
@@ -173,7 +198,7 @@ class WeatherService {
       // console.log('weatherData: ', weatherData);
       const currentWeather = this.parseCurrentWeather(weatherData);
       // console.log('currentWeather: ', currentWeather);
-      const forecast = this.buildForecastArray(currentWeather, weatherData.daily);
+      const forecast = this.buildForecastArray(currentWeather, weatherData.list);
       // console.log('forecast: ', forecast);
       return forecast;
     }
