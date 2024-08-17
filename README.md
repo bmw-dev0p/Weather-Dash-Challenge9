@@ -20,7 +20,7 @@
   <br/>Step 6: Navigate to http://localhost:3001 in the browser or environment of your choosing (Insomnia)
   ## Usage:
   After installation, the landing page should look like this:
-  <br/>![landing]()
+  <br/>![landing](https://github.com/bmw-dev0p/Weather-Dash-Challenge9/blob/main/assets/1.jpg?raw=true)
   <br/> Example usage of real time weather data displayed after several city weather searches
   <br/>![landing]()
   ## Features:
