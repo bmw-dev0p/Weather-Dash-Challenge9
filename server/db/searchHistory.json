@@ -1,18 +1,26 @@
 [
 	{
+		"name": "Seattle",
+		"id": 5809844
+	},
+	{
 		"name": "Houston",
 		"id": 4699066
+	},
+	{
+		"name": "Portland",
+		"id": 5746545
 	},
 	{
 		"name": "Raleigh",
 		"id": 4487042
 	},
 	{
-		"name": "Dallas",
-		"id": 4684904
-	},
-	{
 		"name": "Richmond",
 		"id": 4781708
+	},
+	{
+		"name": "Boston",
+		"id": 4930956
 	}
 ]
