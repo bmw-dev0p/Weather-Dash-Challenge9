@@ -1,4 +1,4 @@
-# "Weather Dashboard" 
+# Weather Dashboard
   Created By: "Brad Webster" - in collaboration with edX coding bootcamp
   ## Description:
   After discovering the wide world of APIs, I was motivated to create my very first full stack application.
@@ -24,7 +24,7 @@
   Landing page use: Type in search bar the city of choosing.
   <br/>![landing](https://github.com/bmw-dev0p/Weather-Dash-Challenge9/blob/main/assets/1.jpg?raw=true)
   <br/> Example usage of real time weather data displayed after several city weather searches. Trash can icon removes search history.
-  <br/>![landing](https://github.com/bmw-dev0p/Weather-Dash-Challenge9/blob/main/assets/2.jpg?raw=true)
+  <br/>![displayWeather](https://github.com/bmw-dev0p/Weather-Dash-Challenge9/blob/main/assets/2.jpg?raw=true)
   ## Features:
   ### Coding Language(s): 
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
